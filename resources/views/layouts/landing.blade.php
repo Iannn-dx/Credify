@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title', config('app.name', 'Ticketing System'))</title>
+        <title>@yield('title', config('app.name', 'Credify'))</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
@@ -13,11 +13,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="flex min-h-screen flex-col bg-black text-white">
+        <div class="flex min-h-screen flex-col bg-white/70 backdrop-blur">
             <header class="border-b border-neutral-800">
                 <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
                     <a href="{{ route('home') }}" class="text-lg font-bold tracking-tight text-red-500">
-                        {{ config('app.name', 'Ticketing System') }}
+                        {{ config('app.name', 'Credify') }}
                     </a>
 
                     <nav class="flex items-center gap-6">

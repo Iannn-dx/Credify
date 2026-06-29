@@ -27,7 +27,7 @@
 
     <div class="flex min-h-screen flex-col lg:pl-64">
         <header
-            class="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-neutral-800 bg-black px-4 lg:px-8">
+            class="sticky top-0 z-30 flex h-16 items-center gap-4 px-4 lg:px-8">
             <button @click="sidebarOpen = !sidebarOpen" type="button"
                 class="inline-flex items-center justify-center rounded-md p-2 text-neutral-400 hover:bg-neutral-800 hover-text-white lg:hidden">
                 <span class="sr-only">Open sidebar</span>
