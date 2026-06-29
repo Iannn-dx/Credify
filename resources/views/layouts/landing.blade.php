@@ -33,7 +33,7 @@
                                 Dashboard
                             </a>
                         @else
-                            <a href="#" class="landing-nav-link hidden sm:inline">
+                            <a href="{{ route('login') }}" class="landing-nav-link hidden sm:inline">
                                 Log in
                             </a>
                             <a href="#" class="landing-btn-primary">
