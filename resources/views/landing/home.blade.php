@@ -1,6 +1,6 @@
 @extends('layouts.landing')
 
-@section('title', config('app.name', 'Ticketing System'))
+@section('title', config('app.name', 'Credify'))
 
 @section('content')
     <section class="mx-auto max-w-5xl px-6 py-20 text-center sm:py-28">
@@ -13,7 +13,7 @@
 
         <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             @auth
-                <a href="{{ Auth::user()->homeRoute() }}" class="landing-btn-primary px-8 py-3">
+                <a href="#" class="landing-btn-primary px-8 py-3">
                     Go to Dashboard
                 </a>
             @endauth
