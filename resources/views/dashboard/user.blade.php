@@ -4,20 +4,12 @@
 
 @section('content')
 
-<h1 class="text-2xl font-bold text-black">
+<h1 class="text-2xl font-bold text-white">
     Welcome back, {{ Auth::user()->name }}
 </h1>
 
-<div class="mt-6">
+<div class="mt-6 text-white">
     <p>Your dashboard content here</p>
 </div>
-
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-
-    <button type="submit" class="text-red-500 hover:underline">
-        Logout
-    </button>
-</form>
 
 @endsection
