@@ -23,7 +23,7 @@
         x-cloak>
     </div>
 
-    @include()
+    @include('layouts.sidebar')
 
     <div class="flex min-h-screen flex-col lg:pl-64">
         <header
@@ -47,7 +47,7 @@
 
         {{-- main --}}
         <main class="flex-1 bg-neutral-950 p-4 lg:p-8">
-          {{ $slot }}
+          @yield('content')
         </main>
     </div>
 </body>
