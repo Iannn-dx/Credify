@@ -65,8 +65,8 @@ class User extends Authenticatable
     public function homeRoute(): string
     {
         return $this->isAdmin()
-            ? route('admin.dashboard', absolute: false)
-            : route('dashboard', absolute: false);
+            ? route('admin.dashboard')
+            : route('dashboard');
     }
 
 }
