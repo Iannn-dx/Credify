@@ -13,6 +13,21 @@ return new class extends Migration
     {
         Schema::create('credentials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+
+            $table->string('type');
+            $table->string('issuer');
+
+            $table->date('issue_date');
+            $table->date('expiry_date')->nullable();
+
+            $table->string('file_path');
+
+            $table->enum('status', ['pending', 'unverified', 'rejected'])->default('pending');
+
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
