@@ -43,7 +43,7 @@
                         <a href="{{ route('login') }}" class="landing-nav-link hidden sm:inline">
                             Log in
                         </a>
-                        <a href="#" class="landing-btn-primary">
+                        <a href="{{ route('register') }}" class="landing-btn-primary">
                             Create Account
                         </a>
                     @endauth

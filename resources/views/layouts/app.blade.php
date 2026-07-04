@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- title --}}
     <title>{{ config('app.name', 'Credify') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,7 +15,6 @@
 </head>
 
 <body class="font-sans antialiased bg-neutral-950" x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false">
-    {{-- page --}}
     <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-200"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition-opacity ease-linear duration-200" x-transition:leave-start="opacity-100"
@@ -27,7 +25,6 @@
     @include('layouts.sidebar')
 
     <div class="flex min-h-screen flex-col lg:pl-64">
-        {{-- mobile hamburger --}}
         <div class="sticky top-0 z-30 flex items-center px-4 pt-4 lg:hidden">
             <button @click="sidebarOpen = !sidebarOpen" type="button"
                 class="inline-flex items-center justify-center rounded-md p-2 text-neutral-400 hover:bg-neutral-800 hover:text-white">
@@ -38,7 +35,6 @@
             </button>
         </div>
 
-        {{-- main --}}
         <main class="flex-1 bg-neutral-950 p-4 lg:p-8">
           @yield('content')
         </main>
