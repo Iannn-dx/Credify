@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased bg-neutral-950" x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false">
+<body class="font-sans antialiased bg-white text-black" x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false">
     <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-200"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition-opacity ease-linear duration-200" x-transition:leave-start="opacity-100"
@@ -35,7 +35,7 @@
             </button>
         </div>
 
-        <main class="flex-1 bg-neutral-950 p-4 lg:p-8">
+        <main class="flex-1 bg-gray-50 p-4 lg:p-8">
           @yield('content')
         </main>
     </div>

@@ -4,11 +4,11 @@
 
 @section('content')
 
-<h1 class="text-2xl font-bold text-white">
+<h1 class="text-2xl font-bold">
     Welcome back, {{ Auth::user()->name }}
 </h1>
 
-<div class="mt-6 text-white">
+<div class="mt-6">
     <p>Your dashboard content here</p>
 </div>
 
