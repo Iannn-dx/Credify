@@ -69,4 +69,24 @@ class User extends Authenticatable
             : route('dashboard');
     }
 
+    // credentials owned by the user
+    public function credentials(){
+        return $this->hasMany(Credential::class);
+    }
+
+    // history created by the user
+    public function credentialHistories(){
+        return $this->hasMany(CredentialHistory::class);
+    }
+
+    // verification done by user 
+    public function verifications(){
+        return $this->hasMany(Verification::class, 'verifier_id');
+    }
+
+    // request made by user
+    public function verificationRequest(){
+        return $this->hasMany(VerificationRequest::class, 'requested_by');
+    }
+
 }
