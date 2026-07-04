@@ -46,7 +46,7 @@
 
                 <div x-show="open" x-collapse class="ml-4 space-y-1">
 
-                    <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('credentials.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
                         My Credentials
                     </a>
 
