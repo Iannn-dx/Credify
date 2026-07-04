@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('credential_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('credential_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
+            $table->string('action');
+            $table->text('description');
             $table->timestamps();
         });
     }
