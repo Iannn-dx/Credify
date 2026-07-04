@@ -41,7 +41,7 @@
 
             @guest
                 <div class="mt-12">
-                    <a href="#"
+                    <a href="{{ route('register') }}"
                        class="inline-flex items-center rounded-xl bg-red-600 px-6 py-3 text-sm font-medium text-white hover:bg-red-500 transition">
                         Get Started
                     </a>

@@ -46,9 +46,9 @@
                         id="remember_me"
                         type="checkbox"
                         name="remember"
-                        class="h-4 w-4 rounded-full border-neutral-600 bg-neutral-950 text-white focus:ring-neutral-500 focus:ring-offset-0"
+                        class="h-4 w-4 rounded-full border-neutral-600 bg-neutral-950 accent-black focus:ring-neutral-500 focus:ring-offset-0"
                     />
-                    <span class="text-sm font-normal text-white">Remember Me</span>
+                    <span class="text-sm font-normal text-black">Remember Me</span>
                 </x-form-label>
 
                 @if (Route::has('password.request'))

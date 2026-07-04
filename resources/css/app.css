@@ -51,15 +51,15 @@
     }
 
     .landing-nav-link {
-        @apply text-sm text-neutral-400 transition hover:text-white;
+        @apply text-sm text-neutral-400 transition hover:text-black;
     }
 
     .landing-nav-link-active {
-        @apply text-white;
+        @apply text-black;
     }
 
     .landing-btn-primary {
-        @apply rounded-md bg-neutral-200 px-4 py-2 text-sm font-semibold text-black transition hover:bg-white;
+        @apply rounded-md bg-neutral-200 px-4 py-2 text-sm font-semibold text-black transition hover:bg-black hover:text-white;
     }
 
     .landing-btn-secondary {
