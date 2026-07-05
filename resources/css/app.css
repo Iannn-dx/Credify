@@ -65,6 +65,27 @@
     .landing-btn-secondary {
         @apply rounded-md border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-300 transition hover:border-neutral-500 hover:text-white;
     }
+
+    .input-text {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 14px;
+        background: rgba(249, 250, 251, 0.5);
+    }
+
+    .input-text:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        background: white;
+    }
+
+     .input-select {
+        @apply block w-full pl-3 pr-10 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-white text-gray-700 cursor-pointer;
+    }
 }
 
 @keyframes auth-fade-up {
@@ -79,7 +100,4 @@
     }
 }
 
-    .input-text {
-        @apply w-full rounded-md border border-neutral-800 bg-neutral-950 px-3 py-2.5 text-sm text-white placeholder-neutral-600 shadow-sm focus:border-neutral-600 focus:outline-none focus:ring-1 focus:ring-neutral-600;
-    }
 
