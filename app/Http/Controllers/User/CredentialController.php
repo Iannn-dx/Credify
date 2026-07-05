@@ -47,7 +47,7 @@ class CredentialController extends Controller
         auth()->user()->credentials()->create([
             'title'       => $validated['title'],
             'issuer'      => $validated['issuer'],
-            'type'        => $validated['type'],
+            'type'    => $validated['type'],
             'issue_date'  => $validated['issue_date'],
             'expiry_date' => $validated['expiry_date'] ?? null,
             'description' => $validated['description'] ?? null,

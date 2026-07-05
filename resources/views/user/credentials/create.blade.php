@@ -43,8 +43,8 @@
                 {{-- 2 col --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <x-form-label for="doc_type" />Category
-                        <x-select-form name="category" id="doc_category" required>
+                        <x-form-label for="type" />Category
+                        <x-select-form name="type" id="doc_category" required>
                             <option value="" disabled selected>Select category</option>
                             <option value="education">Education</option>
                         </x-select-form>
