@@ -60,10 +60,58 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {{-- cards index --}}
-                
-                
+                @if ($credentials->isEmpty())
+                    <div
+                        class="dash-card flex flex-col items-center justify-center py-16 px-6 border-2 border-dashed border-neutral-700 rounded-xl bg-white/10 text-center transition-colors hover:bg-neutral-800/10">
+                        <div class="p-4 bg-neutral-800 rounded-full mb-4 ring-1 ring-neutral-700">
+                            <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-lg font-semibold text-black">No credentials yet</h3>
+                        <p class="mt-1 max-w-sm text-sm text-neutral-800">Get started by uploading your first set of
+                            credentials.</p>
+
+                        <a href="{{ route('credentials.create') }}"
+                            class="mt-6 inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white transition-colors bg-indigo-600 rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-neutral-900">
+                            <svg class="w-4 h-4 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                                </path>
+                            </svg>
+                            Upload Credentials
+                        </a>
+                    </div>
+                @else
+                    @foreach ($credentials as $credential)
+                        <div
+                            class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
+                            <div class="p-5 flex-1">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div
+                                        class="h-12 w-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 14l9-5-9-4-9 5 9 4zm0 0v6l9-5V9l-9 5zm0 0l-9-5v6l9 5v-6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+                                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500">
+                                            
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
                 {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
                     <div class="p-5 flex-1">
