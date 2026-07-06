@@ -101,16 +101,62 @@
                                                 d="M12 14l9-5-9-4-9 5 9 4zm0 0v6l9-5V9l-9 5zm0 0l-9-5v6l9 5v-6z"></path>
                                         </svg>
                                     </div>
+                                    @php
+                                        $status = $credential->status;
+                                    @endphp
+
                                     <span
-                                        class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
-                                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500">
-                                            
+                                        class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md capitalize">
+                                        <span
+                                            class="h-1.5 w-1.5 rounded-full 
+                                            @if ($status === 'pending') bg-yellow-500 
+                                            @elseif ($status === 'verified') bg-emerald-500 @endif">
                                         </span>
+                                        {{ str_replace('_', ' ', $status) }}
                                     </span>
+                                </div>
+                                <h3 class="text-base font-semibold text-gray-900 leading-tight">{{ $credential->title }}
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-1">{{ $credential->issuer }}</p>
+                                <div class="flex items-center gap-2 mt-4 text-xs font-medium text-gray-400">
+                                    <span>{{ $credential->type }}</span>
+                                    <span>•</span>
+                                    <span>Uploaded {{ $credential->issue_date }}</span>
+                                </div>
+                            </div>
+                            <div
+                                class="border-t border-gray-100 p-4 bg-gray-50/50 rounded-b-2xl flex justify-between items-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                                <button class="text-sm font-medium text-indigo-600 hover:text-indigo-800">View
+                                    Details</button>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                        title="Share">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        class="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                @endif
+
+                @if ($credentials->hasPages())
+                    <div class="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between">
+                        {{ $credentials->links() }}
+                    </div>
                 @endif
                 {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
@@ -298,20 +344,6 @@
                     </div>
                 </div> --}}
 
-            </div>
-
-            {{-- Pagination Area --}}
-            <div class="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between">
-                <p class="text-sm text-gray-500">Showing <span class="font-medium text-gray-900">1</span> to <span
-                        class="font-medium text-gray-900">4</span> of <span class="font-medium text-gray-900">12</span>
-                    results</p>
-                <div class="flex gap-2">
-                    <button
-                        class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
-                        disabled>Previous</button>
-                    <button
-                        class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
-                </div>
             </div>
 
         </div>
