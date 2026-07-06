@@ -7,7 +7,7 @@
     <div x-data="{ open: false }" class="max-w-7xl mx-auto px-4 py-8">
         <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
-            {{-- Page Header --}}
+            {{-- header --}}
             <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                 <div>
                     <h1 class="text-2xl font-semibold tracking-tight text-gray-900">My Credentials</h1>
@@ -21,15 +21,13 @@
                     </svg>
                     Upload New Document
                 </button>
-
-
             </header>
 
-            {{-- Search and Filter Toolbar --}}
+            {{-- search --}}
             <div
                 class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
 
-                {{-- Search Input --}}
+                {{-- search bar --}}
                 <div class="relative w-full md:max-w-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +39,7 @@
                         class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all bg-gray-50/50 focus:bg-white">
                 </div>
 
-                {{-- Filters --}}
+                {{-- filter --}}
                 <div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
                     <select
                         class="block w-full md:w-auto pl-3 pr-8 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-white text-gray-700 cursor-pointer">
@@ -62,11 +60,11 @@
                 </div>
             </div>
 
-            {{-- Credentials Grid --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                {{-- Card 1: Verified (Education) --}}
-                <div
+                {{-- cards index --}}
+                
+                
+                {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
                     <div class="p-5 flex-1">
                         <div class="flex justify-between items-start mb-4">
@@ -113,10 +111,10 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Card 2: Pending (Work) --}}
-                <div
+                {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
                     <div class="p-5 flex-1">
                         <div class="flex justify-between items-start mb-4">
@@ -155,10 +153,10 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Card 3: Rejected (Certificate) --}}
-                <div
+                {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-rose-300 hover:shadow-md transition-all group flex flex-col relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-1 h-full bg-rose-500"></div>
                     <div class="p-5 flex-1 pl-6">
@@ -198,10 +196,10 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Card 4: Verified (Certificate) --}}
-                <div
+                {{-- <div
                     class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group flex flex-col">
                     <div class="p-5 flex-1">
                         <div class="flex justify-between items-start mb-4">
@@ -250,7 +248,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 
