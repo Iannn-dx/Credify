@@ -13,6 +13,9 @@ class VerificationController extends Controller
     public function index()
     {
         //
+        $verifications = auth()->user()->verifications()->latest()->paginate(10);
+
+        return view('user.verifications.index', compact('verifications'));
     }
 
     /**

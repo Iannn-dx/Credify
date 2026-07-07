@@ -54,7 +54,7 @@
                         Submit Request
                     </a>
 
-                    <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('verification.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
                         Verification
                     </a>
 
