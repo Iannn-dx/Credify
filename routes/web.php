@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\RequestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('credentials', CredentialController::class);
+
+    Route::resource('requests', RequestController::class);
 });
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
