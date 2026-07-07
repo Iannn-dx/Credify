@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Str;
+
 class Credential extends Model
 {
     //
@@ -40,5 +42,16 @@ class Credential extends Model
     // history
     public function histories(){
         return $this->hasMany(CredentialHistory::class);
+    }
+
+    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($credential) {
+            $credential->credential_id = 'STFD-' . rand(10000, 99999) . '-' . strtoupper(substr($credential->type, 0, 2));
+        });
     }
 }

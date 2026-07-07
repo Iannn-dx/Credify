@@ -126,8 +126,8 @@
                             </div>
                             <div
                                 class="border-t border-gray-100 p-4 bg-gray-50/50 rounded-b-2xl flex justify-between items-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-                                <button class="text-sm font-medium text-indigo-600 hover:text-indigo-800">View
-                                    Details</button>
+                                <a href="{{ route('credentials.show', $credential) }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">View
+                                    Details</a>
                                 <div x-data="{ open: false }" class="flex gap-2">
                                     <button
                                         class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
