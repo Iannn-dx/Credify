@@ -107,44 +107,56 @@
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
                         <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">File Preview</h2>
-                        <span class="text-xs font-medium text-gray-400">PDF • 2.4 MB</span>
+                        <span class="text-xs font-medium text-gray-400">
+                            {{ strtoupper(pathinfo($credential->file_path, PATHINFO_EXTENSION)) }}</span>
                     </div>
 
-                    {{-- Mock Interactive Preview Frame --}}
                     <div
-                        class="p-6 bg-gray-100 flex justify-center items-center aspect-[4/3] border-t border-gray-100 relative group">
-                        <div
-                            class="bg-white shadow-lg rounded-md w-4/5 h-5/6 p-8 flex flex-col justify-between border border-gray-200 select-none">
-                            <div class="flex justify-between items-start border-b pb-4 border-gray-100">
-                                <div>
-                                    <div class="h-4 w-24 bg-gray-200 rounded mb-2"></div>
-                                    <div class="h-3 w-36 bg-gray-100 rounded"></div>
-                                </div>
-                                <div
-                                    class="h-8 w-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-300 font-bold text-xs">
-                                    SU</div>
-                            </div>
-                            <div class="space-y-3 py-4 flex-1 justify-center flex flex-col items-center">
-                                <div class="h-5 w-48 bg-gray-200 rounded"></div>
-                                <div class="h-3 w-64 bg-gray-100 rounded"></div>
-                            </div>
-                            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-                                <div class="h-3 w-16 bg-gray-100 rounded"></div>
-                                <div class="h-6 w-16 bg-emerald-50 rounded"></div>
-                            </div>
-                        </div>
+                        class="p-6 bg-gray-100 flex justify-center items-center aspect-[4/3] border-t border-gray-100 relative group ">
+                        @php
+                            $extension = pathinfo($credential->file_path, PATHINFO_EXTENSION);
+                        @endphp
 
+                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png']))
+                            <img src="{{ asset('storage/' . $credential->file_path) }}" alt="Credential Preview"
+                                class="max-h-full max-w-full rounded-lg shadow-lg object-contain">
+
+                        @elseif (strtolower($extension) === 'pdf')
+                            <iframe src="{{ asset('storage/' . $credential->file_path) }}"
+                                class="w-4/5 h-full rounded-lg shadow-lg border border-gray-200"></iframe>
+
+                        @else
+                            <div class="bg-white rounded-lg shadow-lg p-10 text-center">
+
+                                <svg class="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 21h10a2 2 0 002-2V9l-5-5H7a2 2 0 00-2 2v13a2 2 0 002 2z">
+                                    </path>
+
+                                </svg>
+
+                                <p class="text-sm text-gray-500 mt-3">
+                                    {{ strtoupper($extension) }} Document
+                                </p>
+
+                            </div>
+                        @endif
                         <div
                             class="absolute inset-0 bg-gray-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">
-                            <button
-                                class="bg-white text-gray-800 text-xs font-medium px-4 py-2 rounded-lg shadow-md border border-gray-200/50 flex items-center gap-1.5 hover:scale-105 transition-transform">
+
+                            <a href="{{ asset('storage/' . $credential->file_path) }}" target="_blank"
+                                class="bg-white text-gray-800 text-xs font-medium px-4 py-2 rounded-lg shadow-md border border-gray-200 flex items-center gap-1.5 hover:scale-105 transition-transform">
+
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
                                     </path>
                                 </svg>
                                 Open File in Full Window
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -200,7 +212,7 @@
                         <div class="divide-y divide-gray-50 text-xs">
                             <div class="py-3 flex justify-between items-center">
                                 <span class="text-gray-400">Verified By</span>
-                                <span class="font-medium text-gray-800">Stanford Registrar Service</span>
+                                <span class="font-medium text-gray-800">{{ $credential->issuer }}</span>
                             </div>
                             <div class="py-3 flex justify-between items-center">
                                 <span class="text-gray-400">Timestamp</span>
@@ -218,15 +230,14 @@
                     </div>
                 </div>
 
-                {{-- Danger / Destructive Management Zone --}}
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                     <h3 class="text-sm font-semibold text-gray-900 mb-2">Management</h3>
                     <p class="text-xs text-gray-400 leading-relaxed mb-4">Deleting this credential will revoke all active
                         sharing handles and links permanently associated with it.</p>
 
                     <form action="{{ route('credentials.destroy', $credential) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
+                        @csrf
+                        @method('DELETE')
 
                         <button type="submit"
                             class="w-full inline-flex justify-center items-center gap-2 bg-white border border-rose-200 text-rose-600 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-rose-50 hover:border-rose-300 transition-all focus:outline-none">
