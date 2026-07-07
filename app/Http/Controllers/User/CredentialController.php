@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Credential;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CredentialController extends Controller
@@ -85,8 +87,12 @@ class CredentialController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Credential $credential): RedirectResponse
     {
         //
+        // $this->authorizeOwner($credential);
+        $credential->delete();
+
+        return redirect()->route('credentials.index')->with('deleted', 'Credential deleted successfully.');
     }
 }
