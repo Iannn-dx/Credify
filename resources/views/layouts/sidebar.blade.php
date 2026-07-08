@@ -96,7 +96,7 @@
             </div>
         @endif
 
-        <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+        <a href="{{ route('profile.edit') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
             Profile
         </a>
     </nav>
