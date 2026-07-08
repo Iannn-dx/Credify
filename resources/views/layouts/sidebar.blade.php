@@ -24,12 +24,24 @@
         @endauth
 
         @if ($user && $user->isAdmin())
-            <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
-                All Tickets
+            <a href="{{ route('admin.requests.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800 {{ request()->routeIs('admin.requests.*') ? 'bg-neutral-800 text-white' : '' }}">
+                Verification Requests
             </a>
 
-            <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+            <a href="{{ route('admin.users.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800 {{ request()->routeIs('admin.users.*') ? 'bg-neutral-800 text-white' : '' }}">
                 Users
+            </a>
+
+            <a href="{{ route('admin.credentials.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800 {{ request()->routeIs('admin.credentials.*') ? 'bg-neutral-800 text-white' : '' }}">
+                Credentials
+            </a>
+
+            <a href="{{ route('admin.verifications.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800 {{ request()->routeIs('admin.verifications.*') ? 'bg-neutral-800 text-white' : '' }}">
+                Verifications
+            </a>
+
+            <a href="{{ route('verification.create') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                Record Verification
             </a>
         @else
             <div x-data="{ open: false }" class="space-y-1">
