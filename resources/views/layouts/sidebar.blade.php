@@ -50,7 +50,7 @@
                         My Credentials
                     </a>
 
-                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('requests.create') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
                         Submit Request
                     </a>
 

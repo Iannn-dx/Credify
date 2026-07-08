@@ -1,137 +1,219 @@
 @extends('layouts.app')
 
-@section('title', 'Review Verification Request')
+@section('title', 'Verifications')
 
 @section('content')
 
 <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-    
-    {{-- Top Utility Bar --}}
-    <nav class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Back to Request Queue
-        </a>
-        <span class="text-xs font-mono text-gray-400 bg-gray-100 px-2 py-1 rounded">REQ-2026-89412</span>
-    </nav>
 
-    {{-- Main Document Header --}}
-    <header class="pb-6 border-b border-gray-100 mb-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <div class="flex items-center gap-3 flex-wrap">
-                    <h1 class="text-2xl font-semibold tracking-tight text-gray-900">B.Sc. Computer Science Degree</h1>
-                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-100">
-                        <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span> Pending Review
-                    </span>
-                </div>
-                <p class="text-sm text-gray-500 mt-1">Submitted by <strong class="text-gray-700 font-medium">Sarah Jenkins</strong> • Received July 7, 2026</p>
-            </div>
+    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight text-gray-900">Verifications</h1>
+            <p class="text-sm text-gray-500 mt-0.5">Verification outcomes recorded in the <span class="font-mono text-gray-600">verifications</span> table.</p>
         </div>
+
+        @if ($pendingRequests->isNotEmpty())
+            <a href="{{ route('verification.create') }}"
+                class="inline-flex justify-center items-center gap-2 bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-100">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Review Pending Request
+            </a>
+        @endif
     </header>
 
-    {{-- Review Workspace --}}
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {{-- Left Column: Applicant Provided Data & File Preview (8 Columns) --}}
-        <div class="lg:col-span-8 space-y-6">
-            
-            {{-- Provided Reference Check Card --}}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-50 bg-gray-50/30">
-                    <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Submitted Reference Details</h2>
-                </div>
-                
-                <div class="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div>
-                        <p class="text-xs font-medium text-gray-400">Full Name (at Enrollment)</p>
-                        <p class="text-sm font-medium text-gray-900 mt-1">Sarah Marie Jenkins</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-gray-400">Student / Record ID</p>
-                        <p class="text-sm font-mono text-gray-900 mt-1">SU-89412</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-gray-400">Graduation Year</p>
-                        <p class="text-sm font-medium text-gray-900 mt-1">2025</p>
-                    </div>
-                    <div class="sm:col-span-3">
-                        <p class="text-xs font-medium text-gray-400">Applicant Note to Registrar</p>
-                        <p class="text-sm text-gray-600 mt-1 bg-gray-50/60 p-3 rounded-xl border border-gray-100 italic leading-relaxed">
-                            "Hi, I graduated under my maiden name (Jenkins) in Winter 2025. Please let me know if you need me to attach my marriage certificate for legal name matching."
-                        </p>
-                    </div>
-                </div>
+    @if (session('success'))
+        <div class="mb-6 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($pendingRequests->isNotEmpty())
+        <section class="mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-gray-900">Pending Requests Queue</h2>
+                <p class="text-xs text-gray-400">From <span class="font-mono">verification_requests</span> where status = pending</p>
             </div>
 
-            {{-- Document Preview Card --}}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
-                    <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Uploaded Asset File</h2>
-                    <a href="#" class="text-xs font-medium text-indigo-600 hover:text-indigo-700 transition-colors">Download Original PDF ↗</a>
-                </div>
-                
-                {{-- Preview Canvas Frame --}}
-                <div class="p-8 bg-gray-100 border-t border-gray-100 flex justify-center items-center aspect-[4/3]">
-                    <div class="bg-white shadow-xl rounded-md w-full h-full p-8 flex flex-col justify-between border border-gray-200 select-none">
-                        <div class="flex justify-between items-start border-b pb-4 border-gray-100">
-                            <div>
-                                <h3 class="text-sm font-bold tracking-tight text-gray-800">STANFORD UNIVERSITY</h3>
-                                <p class="text-[10px] text-gray-400 uppercase tracking-wider">Office of the University Registrar</p>
-                            </div>
-                            <div class="h-8 w-8 rounded-full bg-red-800 flex items-center justify-center text-white font-bold text-xs shadow-sm">S</div>
-                        </div>
-                        
-                        <div class="space-y-3 py-6 text-center">
-                            <p class="text-xs font-serif text-gray-500">This certifies that upon the recommendation of the Faculty has conferred on</p>
-                            <h2 class="text-lg font-serif font-semibold text-gray-900 tracking-wide">Sarah Marie Jenkins</h2>
-                            <p class="text-xs font-serif text-gray-500">the degree of</p>
-                            <h3 class="text-sm font-bold text-gray-800">Bachelor of Science in Computer Science</h3>
-                        </div>
-
-                        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-[10px] text-gray-400">
-                            <span>Conferred June 12, 2025</span>
-                            <div class="h-6 w-20 bg-gray-100 rounded border border-dashed flex items-center justify-center font-mono text-[8px]">MOCK_SIGNATURE</div>
-                        </div>
-                    </div>
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-100 text-sm">
+                        <thead class="bg-gray-50/80">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Credential</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Requested By</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Message</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Requested At</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 bg-white">
+                            @foreach ($pendingRequests as $pendingRequest)
+                                <tr class="hover:bg-gray-50/60 transition-colors">
+                                    <td class="px-4 py-4 whitespace-nowrap font-mono text-xs text-gray-500">
+                                        {{ $pendingRequest->id }}
+                                    </td>
+                                    <td class="px-4 py-4 min-w-[10rem]">
+                                        <p class="font-medium text-gray-900">{{ $pendingRequest->credential?->title ?? '—' }}</p>
+                                        <p class="text-xs text-gray-400 mt-0.5">credential_id: {{ $pendingRequest->credential_id }}</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-700">
+                                        {{ $pendingRequest->user?->name ?? '—' }}
+                                        <p class="text-xs text-gray-400">requested_by: {{ $pendingRequest->requested_by }}</p>
+                                    </td>
+                                    <td class="px-4 py-4 max-w-xs">
+                                        @if ($pendingRequest->message)
+                                            <p class="text-gray-600 truncate" title="{{ $pendingRequest->message }}">{{ $pendingRequest->message }}</p>
+                                        @else
+                                            <span class="text-gray-400">—</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">
+                                        {{ ($pendingRequest->requested_at ?? $pendingRequest->created_at)?->format('M j, Y g:i A') ?? '—' }}
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <a href="{{ route('verification.create', ['verification_request_id' => $pendingRequest->id]) }}"
+                                            class="text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                            Review
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </section>
+    @endif
 
+    <form method="GET" action="{{ route('verification.index') }}"
+        class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+        <div class="relative w-full md:max-w-md">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <input type="text" placeholder="Search verifications..."
+                class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all bg-gray-50/50 focus:bg-white"
+                disabled>
         </div>
 
-        {{-- Right Column: Decision Panel (4 Columns) --}}
-        <div class="lg:col-span-4 space-y-6">
-            
-            {{-- Decision Action Box --}}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900">Verification Verdict</h3>
-                    <p class="text-xs text-gray-400 mt-0.5">Please evaluate the file match against your database records.</p>
-                </div>
+        <div class="flex items-center gap-3 w-full md:w-auto">
+            <select name="status" onchange="this.form.submit()"
+                class="block w-full md:w-auto pl-3 pr-8 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-white text-gray-700 cursor-pointer">
+                <option value="">All Statuses</option>
+                @foreach ($statuses as $status)
+                    <option value="{{ $status }}" @selected(request('status') === $status)>
+                        {{ ucfirst($status) }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </form>
 
-                {{-- Action Forms --}}
-                <div class="space-y-3 pt-2">
-                    <button type="button" class="w-full inline-flex justify-center items-center gap-2 bg-emerald-600 text-white px-4 py-3 rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-all shadow-sm shadow-emerald-100">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Approve & Cryptographically Sign
-                    </button>
-                    
-                    <button type="button" class="w-full inline-flex justify-center items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 transition-all">
-                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        Flag Issue / Decline Request
-                    </button>
-                </div>
+    @if ($verifications->isEmpty())
+        <div class="flex flex-col items-center justify-center py-16 px-6 border-2 border-dashed border-gray-200 rounded-xl bg-white text-center">
+            <div class="p-4 bg-gray-50 rounded-full mb-4 ring-1 ring-gray-100">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                </svg>
             </div>
 
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
-                <label for="reject_reason" class="block text-xs font-medium text-gray-700 uppercase tracking-wider">Internal Rejection Feedback</label>
-                <textarea id="reject_reason" rows="3" placeholder="Provide notes on why this request cannot be approved (e.g., ID number mismatch, low-resolution attachment)..." class="block w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-gray-50/50 focus:bg-white resize-none"></textarea>
-                <p class="text-[11px] text-gray-400 leading-normal">This commentary will be transmitted directly to the user to guide their corrective upload attempt.</p>
-            </div>
+            <h3 class="text-lg font-semibold text-gray-900">No verifications recorded yet</h3>
+            <p class="mt-1 max-w-sm text-sm text-gray-500">
+                Completed reviews will appear here once a verifier records an outcome.
+            </p>
+        </div>
+    @else
+        <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-100 text-sm">
+                    <thead class="bg-gray-50/80">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Credential</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Verifier</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Remarks</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Verified At</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Created At</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 bg-white">
+                        @foreach ($verifications as $verification)
+                            @php
+                                $status = $verification->status;
+                                $statusClasses = match ($status) {
+                                    'verified' => 'text-emerald-700 bg-emerald-50 border-emerald-100',
+                                    'rejected' => 'text-rose-700 bg-rose-50 border-rose-100',
+                                    default => 'text-gray-700 bg-gray-50 border-gray-100',
+                                };
+                            @endphp
 
+                            <tr class="hover:bg-gray-50/60 transition-colors">
+                                <td class="px-4 py-4 whitespace-nowrap font-mono text-xs text-gray-500">
+                                    {{ $verification->id }}
+                                </td>
+
+                                <td class="px-4 py-4 min-w-[10rem]">
+                                    <p class="font-medium text-gray-900">{{ $verification->credential?->title ?? '—' }}</p>
+                                    <p class="text-xs text-gray-400 mt-0.5">credential_id: {{ $verification->credential_id }}</p>
+                                </td>
+
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">
+                                    {{ $verification->verifier?->name ?? '—' }}
+                                    <p class="text-xs text-gray-400">verifier_id: {{ $verification->verifier_id }}</p>
+                                </td>
+
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-md border text-xs font-medium capitalize {{ $statusClasses }}">
+                                        {{ $status }}
+                                    </span>
+                                </td>
+
+                                <td class="px-4 py-4 max-w-xs">
+                                    @if ($verification->remarks)
+                                        <p class="text-gray-600 truncate" title="{{ $verification->remarks }}">{{ $verification->remarks }}</p>
+                                    @else
+                                        <span class="text-gray-400">—</span>
+                                    @endif
+                                </td>
+
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-600">
+                                    {{ $verification->verified_at?->format('M j, Y g:i A') ?? '—' }}
+                                </td>
+
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-600">
+                                    {{ $verification->created_at?->format('M j, Y g:i A') ?? '—' }}
+                                </td>
+
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <a href="{{ route('verification.show', $verification) }}"
+                                        class="text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-    </div>
+        @if ($verifications->hasPages())
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                {{ $verifications->links() }}
+            </div>
+        @endif
+    @endif
+
 </div>
 
 @endsection

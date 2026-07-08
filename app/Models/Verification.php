@@ -18,6 +18,13 @@ class Verification extends Model
         'verified_at',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'verified_at' => 'datetime',
+        ];
+    }
+
     public function credential(){
         return $this->belongsTo(Credential::class);
     }
