@@ -123,7 +123,6 @@
                 </div>
             </div>
 
-            {{-- Optional Feedback/Reason Box (Shown interactively if declining) --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
                 <label for="reject_reason" class="block text-xs font-medium text-gray-700 uppercase tracking-wider">Internal Rejection Feedback</label>
                 <textarea id="reject_reason" rows="3" placeholder="Provide notes on why this request cannot be approved (e.g., ID number mismatch, low-resolution attachment)..." class="block w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-gray-50/50 focus:bg-white resize-none"></textarea>

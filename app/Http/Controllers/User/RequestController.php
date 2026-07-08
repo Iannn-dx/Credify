@@ -4,18 +4,29 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RequestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        //
-        $requests = auth()->user()->credentials()->latest()->paginate(10);
+        $statuses = ['pending', 'accepted', 'declined', 'completed'];
 
-        return view('user.requests.index', compact('requests'));
+        $query = auth()->user()->verificationRequest()
+            ->with('credential')
+            ->latest('requested_at')
+            ->latest('id');
+
+        if ($request->filled('status') && in_array($request->status, $statuses, true)) {
+            $query->where('status', $request->status);
+        }
+
+        $requests = $query->paginate(10)->withQueryString();
+
+        return view('user.requests.index', compact('requests', 'statuses'));
     }
 
     /**

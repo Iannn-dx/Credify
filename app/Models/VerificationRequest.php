@@ -19,6 +19,14 @@ class VerificationRequest extends Model
         'responded_at',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'requested_at' => 'datetime',
+            'responded_at' => 'datetime',
+        ];
+    }
+
     public function credential(){
         return $this->belongsTo(Credential::class);
     }
