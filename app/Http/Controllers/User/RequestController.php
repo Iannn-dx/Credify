@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -32,17 +33,40 @@ class RequestController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request): View
     {
-        //
+        $credentials = auth()->user()->credentials()->latest()->get();
+        $selectedCredentialId = $request->query('credential_id');
+
+        if ($selectedCredentialId && ! $credentials->contains('id', (int) $selectedCredentialId)) {
+            $selectedCredentialId = null;
+        }
+
+        return view('user.requests.create', compact('credentials', 'selectedCredentialId'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'credential_id' => 'required|integer',
+            'message'       => 'nullable|string',
+        ]);
+
+        $credential = auth()->user()->credentials()->findOrFail($validated['credential_id']);
+
+        auth()->user()->verificationRequest()->create([
+            'credential_id' => $credential->id,
+            'status'        => 'pending',
+            'message'       => $validated['message'] ?? null,
+            'requested_at'  => now(),
+        ]);
+
+        return redirect()
+            ->route('requests.index')
+            ->with('success', 'Verification request submitted successfully.');
     }
 
     /**

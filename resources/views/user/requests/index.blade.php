@@ -21,6 +21,12 @@
         </a>
     </header>
 
+    @if (session('success'))
+        <div class="mb-6 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form method="GET" action="{{ route('requests.index') }}"
         class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
         <div class="relative w-full md:max-w-md">
