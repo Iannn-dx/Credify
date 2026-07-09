@@ -12,6 +12,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Http\Controllers\User\CredentialController;
+use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -19,9 +20,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard.user');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
