@@ -44,9 +44,10 @@
                 Record Verification
             </a>
         @else
-            <div x-data="{ open: false }" class="space-y-1">
+            <div x-data="{ open: {{ request()->routeIs('credentials.*') || request()->routeIs('requests.create') || request()->routeIs('requests.index') || request()->routeIs('verification.*') ? 'true' : 'false' }} }" class="space-y-1">
                 <button @click="open = !open"
-                    class="w-full flex items-center justify-between rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    class="w-full flex items-center justify-between rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800"
+                    :class="open ? 'bg-neutral-800/50 text-white' : ''">
 
                     <span>Credentials</span>
 
@@ -58,29 +59,29 @@
 
                 <div x-show="open" x-collapse class="ml-4 space-y-1">
 
-                    <a href="{{ route('credentials.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('credentials.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('credentials.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         My Credentials
                     </a>
 
-                    <a href="{{ route('requests.create') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('requests.create') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('requests.create') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         Submit Request
                     </a>
 
-                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('requests.index') && !request()->routeIs('history.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         My Requests
                     </a>
 
-                    <a href="{{ route('verification.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('verification.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('verification.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         Verification
                     </a>
 
                 </div>
             </div>
 
-            <div x-data="{ open: false }" class="space-y-1">
+            <div x-data="{ open: {{ request()->routeIs('requests.index') || request()->routeIs('history.index') ? 'true' : 'false' }} }" class="space-y-1">
                 <button @click="open = !open"
                     class="w-full flex items-center justify-between rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800"
-                    :class="open ? 'bg-neutral-800 text-white' : ''">
+                    :class="open ? 'bg-neutral-800/50 text-white' : ''">
 
                     <span>Tracking</span>
 
@@ -93,11 +94,11 @@
 
                 <div class="ml-4 space-y-1" x-show="open" x-collapse>
 
-                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('requests.index') && !request()->routeIs('history.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         Request Status
                     </a>
 
-                    <a href="#" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+                    <a href="{{ route('history.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('history.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         History
                     </a>
 
@@ -108,7 +109,7 @@
             </div>
         @endif
 
-        <a href="{{ route('profile.edit') }}" class="block rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800">
+        <a href="{{ route('profile.edit') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('profile.*') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
             Profile
         </a>
     </nav>

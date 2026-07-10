@@ -50,8 +50,13 @@ class Credential extends Model
     {
         parent::boot();
 
-        static::creating(function ($credential) {
-            $credential->credential_id = 'STFD-' . rand(10000, 99999) . '-' . strtoupper(substr($credential->type, 0, 2));
+        static::created(function ($credential) {
+            CredentialHistory::create([
+                'credential_id' => $credential->id,
+                'user_id'       => $credential->user_id,
+                'action'        => 'uploaded',
+                'description'   => "Uploaded credential: {$credential->title}",
+            ]);
         });
     }
 }

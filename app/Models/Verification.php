@@ -32,4 +32,24 @@ class Verification extends Model
     public function verifier(){
         return $this->belongsTo(User::class, 'verifier_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($verification) {
+            $verification->loadMissing(['credential', 'verifier']);
+            if ($verification->credential) {
+                $statusStr = $verification->status === 'verified' ? 'verified' : 'rejected';
+                $remarksStr = $verification->remarks ? " (Remarks: {$verification->remarks})" : "";
+                
+                CredentialHistory::create([
+                    'credential_id' => $verification->credential_id,
+                    'user_id'       => $verification->credential->user_id,
+                    'action'        => $statusStr,
+                    'description'   => "Credential '{$verification->credential->title}' was {$statusStr} by verifier " . ($verification->verifier?->name ?? 'Admin') . "{$remarksStr}",
+                ]);
+            }
+        });
+    }
 }

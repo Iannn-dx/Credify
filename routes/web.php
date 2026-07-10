@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\User\CredentialController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\HistoryController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('requests', RequestController::class);
     Route::resource('verification', VerificationController::class);
+
+    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
 });
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])

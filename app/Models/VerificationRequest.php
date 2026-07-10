@@ -34,4 +34,21 @@ class VerificationRequest extends Model
     public function user(){
         return $this->belongsTo(User::class, 'requested_by');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($request) {
+            $request->loadMissing('credential');
+            if ($request->credential) {
+                CredentialHistory::create([
+                    'credential_id' => $request->credential_id,
+                    'user_id'       => $request->credential->user_id,
+                    'action'        => 'requested',
+                    'description'   => "Submitted verification request for {$request->credential->title}",
+                ]);
+            }
+        });
+    }
 }
