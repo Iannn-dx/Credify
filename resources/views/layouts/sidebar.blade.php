@@ -67,10 +67,6 @@
                         Submit Request
                     </a>
 
-                    <a href="{{ route('requests.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('requests.index') && !request()->routeIs('history.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
-                        My Requests
-                    </a>
-
                     <a href="{{ route('verification.index') }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-800 {{ request()->routeIs('verification.index') ? 'bg-neutral-800 text-white' : 'text-neutral-300' }}">
                         Verification
                     </a>
