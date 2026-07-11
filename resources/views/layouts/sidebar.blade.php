@@ -44,7 +44,7 @@
                 Record Verification
             </a>
         @else
-            <div x-data="{ open: {{ request()->routeIs('credentials.*') || request()->routeIs('requests.create') || request()->routeIs('requests.index') || request()->routeIs('verification.*') ? 'true' : 'false' }} }" class="space-y-1">
+            <div x-data="{ open: {{ request()->routeIs('credentials.*') || request()->routeIs('requests.create') || request()->routeIs('verification.*') ? 'true' : 'false' }} }" class="space-y-1">
                 <button @click="open = !open"
                     class="w-full flex items-center justify-between rounded px-3 py-2 text-sm text-neutral-300 hover:bg-neutral-800"
                     :class="open ? 'bg-neutral-800/50 text-white' : ''">
