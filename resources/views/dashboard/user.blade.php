@@ -61,21 +61,6 @@
         </div>
     </section>
 
-    <section class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">unverified</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['unverified_credentials'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">verification_requests</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['total_requests'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">pending requests</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['pending_requests'] }}</p>
-        </div>
-    </section>
-
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
         <section class="lg:col-span-2 space-y-4">
