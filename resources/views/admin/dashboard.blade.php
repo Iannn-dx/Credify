@@ -54,52 +54,6 @@
         </div>
     </section>
 
-    <section class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-10">
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">admins</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['admins'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">regular users</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['regular_users'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">cred. pending</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['pending_credentials'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">cred. unverified</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['unverified_credentials'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">cred. rejected</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['rejected_credentials'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">verifications</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['verifications'] }}</p>
-        </div>
-    </section>
-
-    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">total requests</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['total_requests'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">completed requests</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['completed_requests'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">declined requests</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['declined_requests'] }}</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">credential_histories</p>
-            <p class="text-lg font-semibold text-gray-900 mt-1">{{ $stats['credential_histories'] }}</p>
-        </div>
-    </section>
-
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-10">
 
         <section class="space-y-4">
