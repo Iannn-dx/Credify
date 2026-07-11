@@ -30,8 +30,11 @@
                         class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
                         <span
                             class="h-1.5 w-1.5 rounded-full 
-                                            @if ($status === 'pending') bg-yellow-500 
-                                            @elseif ($status === 'verified') bg-emerald-500 @endif">
+                                            @if ($status === 'pending') bg-yellow-500
+                                            @elseif ($status === 'rejected')
+                                                bg-red-500
+                                            @elseif ($status === 'verified')
+                                                bg-emerald-500 @endif">
                         </span>
                         {{ str_replace('_', ' ', $credential->status) }}
                     </span>
@@ -97,8 +100,12 @@
                         <div class="sm:col-span-2">
                             <p class="text-xs font-medium text-gray-400">Description / Scope</p>
                             <p class="text-sm text-gray-600 mt-1 leading-relaxed">
-                                Official academic transcript confirming the completion of a undergraduate degree program in
-                                Computer Science, specialized in Intelligent Systems and Machine Learning architectures.
+                                @if (!empty($credential->description))
+                                    $credential->description
+
+                                @else
+                                    No description provided
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -120,11 +127,9 @@
                         @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png']))
                             <img src="{{ asset('storage/' . $credential->file_path) }}" alt="Credential Preview"
                                 class="max-h-full max-w-full rounded-lg shadow-lg object-contain">
-
                         @elseif (strtolower($extension) === 'pdf')
                             <iframe src="{{ asset('storage/' . $credential->file_path) }}"
                                 class="w-4/5 h-full rounded-lg shadow-lg border border-gray-200"></iframe>
-
                         @else
                             <div class="bg-white rounded-lg shadow-lg p-10 text-center">
 
