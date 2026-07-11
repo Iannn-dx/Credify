@@ -149,7 +149,7 @@
 
         </div>
 
-        <div class="space-y-4 lg:sticky lg:top-8">
+        {{-- <div class="space-y-4 lg:sticky lg:top-8">
             <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-1">Account Activity</h3>
 
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
@@ -197,7 +197,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </div>
