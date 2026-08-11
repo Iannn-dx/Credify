@@ -2,7 +2,7 @@
 
 <div class="auth-stagger-item mb-4">
     <a href="/" class="text-2xl font-bold tracking-tight text-red-500">
-        {{ config('app.name', 'Ticketing System') }}
+        {{ config('app.name', 'Credify  ') }}
     </a>
 </div>
 
